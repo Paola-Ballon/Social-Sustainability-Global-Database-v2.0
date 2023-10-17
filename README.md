@@ -49,6 +49,3 @@ For questions or assistance, please open an issue in this repository or contact 
 
 We welcome contributions to improve the replication process. If you have suggestions, please open an issue or submit a pull request.
 
-# Write the new content to the README.md file
-with open(file_path, 'w', encoding='utf-8') as file:
-    file.write(new_readme_content)
