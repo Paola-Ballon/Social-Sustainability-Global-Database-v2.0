@@ -1,0 +1,1 @@
+# Social-Sustainability-Global-Database-v2.0
