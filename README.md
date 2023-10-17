@@ -1,4 +1,9 @@
-# Social Sustainability Global Database (SSGD) v2.0 Replication
+# Social Sustainability Global Database (SSGD) v2.0
+The SSGD v2.0 presents aggregated information at the national level and, in some cases, by age, gender, area, ethnicity, and religion groups for 68 leading indicators distributed among four dimensions and five areas of Social Sustainability and Inclusion. It also contains information on 52  external indicators (outside the SSI framework) aggregated at the national level, which may relate to any leading indicator. The SSGD v2.0 covers 231 countries and two waves (2015-2018 and 2019-2022).
+
+These codes were developed by the Data & Analytics Global Solutions Group of the Social Sustainability and Inclusion Global Practice of the World Bank. Codes were written by Paola Ballon (pballon@worldbank.org) and Omar Alburqueque (oalburquequechav@worldbank.org).
+
+## SSGD v2.0 Replication
 
 This repository contains all scripts and guidelines necessary for the complete replication of the Social Sustainability Global Database (SSGD) v2.0. The scripts, written in R and Stata, are designed for ease of use to ensure that anyone with access to the World Bank Group's intranet can replicate the database.
 
