@@ -3,9 +3,11 @@ The SSGD v2.0 presents aggregated information at the national level and, in some
 
 These codes were developed by the Data & Analytics Global Solutions Group of the Social Sustainability and Inclusion Global Practice of the World Bank. Codes were written by Paola Ballon (pballon@worldbank.org) and Omar Alburqueque (oalburquequechav@worldbank.org).
 
+![SSGD v2.0 Indicators](D:/Omar/World Bank/SSGD v2.0 GitHub/Social-Sustainability-Global-Database-v2.0/documentation/Picture1.png)
+
 ## SSGD v2.0 Replication
 
-This repository contains all scripts and guidelines necessary for the complete replication of the Social Sustainability Global Database (SSGD) v2.0. The scripts, written in R and Stata, are designed for ease of use to ensure that anyone with access to the World Bank Group's intranet can replicate the database.
+This repository contains all scripts and guidelines necessary for the complete replication of the Social Sustainability Global Database (SSGD) v2.0. The scripts, written in R and Stata, are designed for ease of use to ensure that anyone can replicate them. Some packages such as `datalibweb` used here are not publicly disclosed.
 
 ## Repository Contents
 
