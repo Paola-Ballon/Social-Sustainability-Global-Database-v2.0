@@ -3,7 +3,7 @@ The SSGD v2.0 presents aggregated information at the national level and, in some
 
 These codes were developed by the Data & Analytics Global Solutions Group of the Social Sustainability and Inclusion Global Practice of the World Bank. Codes were written by Paola Ballon (pballon@worldbank.org) and Omar Alburqueque (oalburquequechav@worldbank.org).
 
-![SSGD v2.0 Indicators](D:/Omar/World Bank/SSGD v2.0 GitHub/Social-Sustainability-Global-Database-v2.0/documentation/Picture1.png)
+![SSGD v2.0 Indicators](https://github.com/Paola-Ballon/Social-Sustainability-Global-Database-v2.0/blob/main/documentation/Picture1.png?raw=true)
 
 ## SSGD v2.0 Replication
 
