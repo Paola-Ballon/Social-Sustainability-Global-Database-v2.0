@@ -1,5 +1,3 @@
-# Define the new content for the README.md file
-new_readme_content = """
 # Social Sustainability Global Database (SSGD) v2.0 Replication
 
 This repository contains all scripts and guidelines necessary for the complete replication of the Social Sustainability Global Database (SSGD) v2.0. The scripts, written in R and Stata, are designed for ease of use to ensure that anyone with access to the World Bank Group's intranet can replicate the database.
