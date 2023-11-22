@@ -276,4 +276,31 @@ foreach x in prosea prowom menjob chiear menbet femsec beawif{
 	}
 }
 
+* ----------------- *
+* Final corrections *
+* ----------------- *
+
+* The "voice and accountability estimate" indicator now belongs to the PL pillar/dimension
+* The "economic and social rights performance score" indicator now belongs to the PL pillar/dimension
+foreach x in voiceest econsocrights{
+	forvalues t = 1/2{
+		rename ex_`x'_w`t' pl_`x'_w`t'
+		rename sou_ex_`x'_w`t' sou_pl_`x'_w`t'
+		rename per_ex_`x'_w`t' per_pl_`x'_w`t'
+	}
+}
+
+* WBL related indicators are now included within the SI pillar/dimension
+* The "strength of legal rights index (0=weak to 12=strong)" indicator now belongs to the SI pillar/dimension
+foreach x in wbl_index mobility workplace pay marriage parenthood entrepreneurship assets pension legalrights{
+	forvalues t = 1/2{
+		rename ex_`x'_w`t' si_`x'_w`t'
+		rename sou_ex_`x'_w`t' sou_si_`x'_w`t'
+		rename per_ex_`x'_w`t' per_si_`x'_w`t'
+	}
+}
+
+* Also, we remove the "% of ppl affected by climate change index (0-100, low to high)" indicator from the SSGD v2.0 database
+drop re_totaff* per_re_totaff* sou_re_totaff* ex_scientificart* per_ex_scientificart* sou_ex_scientificart*
+
 save "$final_data\ssgd_v_2_0.dta", replace
