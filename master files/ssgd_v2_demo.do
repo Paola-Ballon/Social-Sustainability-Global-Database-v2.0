@@ -22,6 +22,8 @@ use "ssgd_v_2_0.dta", clear
 * Selected country: Peru *
 * ---------------------- *
 
+global main ""
+
 * We also attach information on other similar countries (from the Andean region), i.e. Bolivia and Ecuador
 keep if (countrycode=="PER" | countrycode=="BOL" | countrycode=="ECU") & group=="nat"
 drop ex_* per_ex_* sou_ex_*
@@ -55,7 +57,7 @@ foreach k in BOL ECU PER{
 	erase "temp_`k'.dta"
 }
 erase "temp.dta"
-save "temp.dta"
+save "temp.dta", replace
 
 use "temp.dta", clear
 * correcting variable

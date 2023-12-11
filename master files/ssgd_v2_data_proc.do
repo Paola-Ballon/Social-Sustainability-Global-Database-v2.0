@@ -52,5 +52,8 @@ do "$scripts\wjp_data_processing.do"
 * WVS
 do "$scripts\wvs_data_processing.do"
 
+* EVS
+do "$scripts\evs_data_processing.do"
+
 * External
 do "$scripts\external_data_processing.do"

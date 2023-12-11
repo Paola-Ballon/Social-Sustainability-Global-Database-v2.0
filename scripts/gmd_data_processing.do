@@ -188,7 +188,7 @@ local w2_SWE = "2021"
 local w2_TUR = "2019"
 local w2_UKR = "2020"
 * EAP
-global ssgd_w1_EAP "LAO MNG MMR PHL TON"
+global ssgd_w1_EAP "LAO MNG MMR PHL TON VNM"
 local w1_LAO = "2018"
 local w1_MNG = "2018"
 local w1_MMR = "2017"

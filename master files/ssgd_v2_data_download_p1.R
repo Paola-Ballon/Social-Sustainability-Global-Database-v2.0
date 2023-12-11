@@ -111,6 +111,14 @@ if (file.exists(folder_wvs)){
   dir.create(folder_wvs)
 }
 
+# EVS
+folder_evs <- "evs"
+if (file.exists(folder_wvs)){
+  cat("The folder already exists")
+} else{
+  dir.create(folder_evs)
+}
+
 # Afrobarometer 7th wave (AF7)
 folder_AF7 <- "afrobarometer7"
 if (file.exists(folder_AF7)){

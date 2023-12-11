@@ -66,5 +66,8 @@ do "$scripts\wjp_all.do"
 do "$scripts\wvs6.do"
 do "$scripts\wvs7.do"
 
+* EVS
+do "$scripts\evs_all.do"
+
 * External
 do "$scripts\external_all.do"
