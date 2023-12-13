@@ -1,5 +1,5 @@
 # Social Sustainability Global Database (SSGD) v2.0
-The SSGD v2.0 presents aggregated information at the national level and, in some cases, by age, gender, area, ethnicity, and religion groups for 68 leading indicators distributed among four dimensions and five areas of Social Sustainability and Inclusion. It also contains information on 52  external indicators (outside the SSI framework) aggregated at the national level, which may relate to any leading indicator. The SSGD v2.0 covers 231 countries and two waves (2015-2018 and 2019-2022).
+The SSGD v2.0 presents aggregated information at the national level and, in some cases, by age, gender, area, ethnicity, and religion groups for 85 leading indicators distributed among four dimensions and five areas of Social Sustainability and Inclusion. It also contains information on 44  external indicators (outside the SSI framework) aggregated at the national level, which may relate to any leading indicator. The SSGD v2.0 covers 231 countries and two waves (2015-2018 and 2019-2022).
 
 These codes were developed by Omar Alburqueque and Paola Ballon of the Data & Analytics Global Solutions Group of the Social Sustainability and Inclusion Global Practice of the World Bank. Credits are as follows: Codes were written by Omar Alburqueque (oalburquequechav@worldbank.org) and revised by Paola Ballon (pballon@worldbank.org).
 
@@ -45,7 +45,7 @@ Data for the SSGD v2.0 is sourced from various databases. Users will need to man
 
 1. Clone this repository to your local machine.
 2. Ensure you meet all software requirements and have installed the necessary R and Stata packages.
-3. Follow the detailed instructions in the "SSGD v2.0 replication guidelines.docx" for setting up your user profile, downloading data, and running the scripts.
+3. Follow the detailed instructions in the [SSGD v2.0 replication guidelines.docx](https://github.com/Paola-Ballon/Social-Sustainability-Global-Database-v2.0/blob/main/documentation/SSGD%20v2.0%20replication%20guidelines.docx) for setting up your user profile, downloading data, and running the scripts.
 4. Refer to the guidelines document for troubleshooting and additional details.
 
 ## Support
