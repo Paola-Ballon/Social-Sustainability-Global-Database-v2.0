@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This codebook accompanies the Social Sustainability Global Database (SSGD) v2.0, a comprehensive database providing aggregated national-level information across various dimensions and areas of social sustainability and inclusion. The SSGD v2.0 features data for 68 leading indicators across four dimensions and five areas, as well as 52 external indicators. It covers 231 countries over two time waves (2015-2018 and 2019-2022).
+This codebook accompanies the Social Sustainability Global Database (SSGD) v2.0, a comprehensive database providing aggregated national-level information across various dimensions and areas of social sustainability and inclusion. The SSGD v2.0 features data for 85 leading indicators across four dimensions and five areas, as well as 44 external indicators. It covers 231 countries over two time waves (2015-2018 and 2019-2022).
 
 ## About the Codebook
 
@@ -20,6 +20,4 @@ The codebook is an essential guide to understanding the indicators used in the S
 
 To facilitate ease of use and ensure accessibility to detailed information, the codebook is available in an Excel format. This format allows users to navigate through the comprehensive list of indicators efficiently.
 
-### Here is the codebook: [Download the Codebook](link-to-codebook.xlsx)
-
-Please download the Excel file to access the complete details of the indicators used in the SSGD v2.0.
+### Please download the codebook here: [SSGD v2.0 codebook.xlsx](https://github.com/Paola-Ballon/Social-Sustainability-Global-Database-v2.0/blob/main/documentation/codebook.xlsx)
