@@ -3,11 +3,11 @@
 
 ## Introduction
 
-This codebook accompanies the Social Sustainability Global Database (SSGD) v2.0, a comprehensive database providing aggregated national-level information across various dimensions and areas of social sustainability and inclusion. The SSGD v2.0 features data for 85 leading indicators across four dimensions and five areas, as well as 44 external indicators. It covers 231 countries over two time waves (2015-2018 and 2019-2022).
+This codebook accompanies the Social Sustainability Global Database (SSGD) v2.0. This database provides national-level and disaggregated statistics across the following dimensions of Social Sustainability: Inclusion, Resilience, Social Cohesion, and Process Legitimacy. Disaggregated statistics comprise rates by ethnicity, religion, age, and gender. The SSGD v2.0 features data for 85 leading indicators across the four dimensions, as well as 44 external indicators. It covers 231 countries over two time periods: 2015-2018 and 2019-2022.
 
 ## About the Codebook
 
-The codebook is an essential guide to understanding the indicators used in the SSGD v2.0. It details each indicator's dimension, area, short name, definition, input question(s), and source. This information is vital for users who wish to comprehend the metrics thoroughly and interpret the data correctly.
+This codebook serves as a guide to understand the construction, definition and harmonization of the indicators in the SSGD v2.0. It details each indicator's dimension, area, short name, definition, input question(s), and source. This information is vital for users who wish to dive into the metrics thoroughly and interpret the data correctly.
 
 ### Contents of the Codebook
 

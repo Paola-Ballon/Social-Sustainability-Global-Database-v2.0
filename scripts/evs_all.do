@@ -1,7 +1,7 @@
 * Social Sustainability Global Database v2.0
 * consultant: Omar Alburqueque Chavez
 * contact: oalburquequechav@worldbank.org
-* last update: August 16th, 2023
+* last update: December 10, 2023
 * original data source: https://search.gesis.org/research_data/ZA7500
 
 /*

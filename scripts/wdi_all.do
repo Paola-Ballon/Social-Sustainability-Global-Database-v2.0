@@ -1,7 +1,7 @@
 * Social Sustainability Global Database v2.0
 * consultant: Omar Alburqueque Chavez
 * contact: oalburquequechav@worldbank.org
-* last update: July 7th, 2023
+* last update: December 10, 2023
 * original data source: https://databank.worldbank.org/source/world-development-indicators#
 
 /*

@@ -1,7 +1,7 @@
 * Social Sustainability Global Database v2.0
 * consultant: Omar Alburqueque Chávez
 * contact: oalburquequechav@worldbank.org
-* last update: July 7th, 2023
+* last update: December 10, 2023
 
 * directory macros
 global proc_data "${ssgd_v2_userpath}\SSGD v2.0\proc_data"
