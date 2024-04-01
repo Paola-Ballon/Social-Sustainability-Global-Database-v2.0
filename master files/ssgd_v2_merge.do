@@ -29,6 +29,9 @@ merge 1:1 countrycode group using "ssgd_latinobarometro.dta", nogenerate update
 forvalues t = 1/11{
 	merge 1:1 countrycode group using "ssgd_wvs_part`t'.dta", nogenerate update
 }
+forvalues t = 1/2{
+	merge 1:1 countrycode group using "ssgd_evs_part`t'.dta", nogenerate update
+}
 merge 1:1 countrycode group using "ssgd_findex.dta", nogenerate update
 merge 1:1 countrycode group using "ssgd_acled.dta", nogenerate update
 merge 1:1 countrycode group using "ssgd_emdat.dta", nogenerate update
@@ -77,15 +80,26 @@ local t_youth = "% of ppl with 15-24 years"
 local t_urban = "% of ppl living in urban areas"
 local t_si_labfor = "labor force participation rate"
 local t_si_unerat = "unemployment rate"
+local t_si_uneratb = "unemployment, total (% of total labor force) (modeled ILO estimate)"
+local t_si_uneratc = "unemployment, total (% of total labor force) (national estimate)"
 local t_si_sel = "% of people that work and are self-employed"
 local t_si_con = "% of people that work and have a contract"
 local t_si_wat = "% of hhs that have access to water"
+local t_si_watb = "people using at least basic drinking water services (% of population)"
+local t_si_watc = "people using safely managed drinking water services (% of population)"
 local t_si_san = "% of hhs that have access to sanitation"
+local t_si_sanb = "people using at least basic sanitation services (% of population)"
+local t_si_sanc = "people using safely managed sanitation services (% of population)"
 local t_si_ele = "% of hhs that have access to electricity"
+local t_si_eleb = "access to electricity (% of population)"
 local t_si_int = "% of hhs that have access to internet"
 local t_si_prienr = "% of people that are attending primary school"
 local t_si_pricom = "% of people that completed primary education"
+local t_si_seccoma = "educational attainment, at least completed lower secondary, population 25+, total (%) (cummulative)"
+local t_si_seccomb = "educational attainment, at least completed post-secondary, population 25+, total (%) (cummulative)"
+local t_si_seccomc = "educational attainment, at least completed upper secondary, population 25+, total (%) (cummulative)"
 local t_si_secenr = "% of people that are attending secondary school"
+local t_si_secenrb = "school enrollment, secondary (% net)"
 local t_si_hea = "% of people with health insurance"
 local t_si_socsec = "% of people that have social security"
 local t_si_femsec = "% of women with 25 years or older that finished secondary school"
@@ -107,6 +121,8 @@ local t_sc_vot = "% of ppl that voted in the last national elections"
 local t_sc_attdem = "% of ppl that has ever attended a demonstration or protest march"
 local t_si_intuse = "% of ppl that uses the Internet"
 local t_re_enofoo = "% of ppl that has gone without enough food to eat in the past year"
+local t_re_enofoob = "prevalence of moderate or severe food insecurity in the population (%)"
+local t_re_enofooc = "prevalence of severe food insecurity in the population (%)"
 local t_sc_volass = "% of ppl that participates in voluntary associations , organizations or community groups"
 local t_sc_conpol = "% of ppl that says they have confidence in the Police"
 local t_sc_conjus = "% of ppl that says they have confidence in the Justice System"
@@ -119,17 +135,19 @@ local t_sc_insnei = "% of ppl that feels insecure living in their area"
 local t_sc_unshom = "% of ppl that has often or sometimes felt unsafe from crime in their own homes in the past year"
 local t_si_menbet = "% of ppl that agrees or strongly agrees men make better political leaders than women"
 local t_re_savmon = "% of ppl that saves some money"
+local t_re_savmonb = "saved any money (% age 15+)"
 local t_sc_actmem = "% of ppl that are active members of organizations"
 local t_sc_solpro = "% of ppl that got together with others to try to resolve local problems"
 local t_si_chiear = "% of women that are the chief earner in their hhs"
 local t_re_govtra = "% of ppl that receive government transfers (individual is beneficiary of a state aid program)"
+local t_re_govtrab = "received government transfer or pension (% age 15+)"
 local t_sc_viccri = "% of ppl that was victim of a crime in the past year"
 local t_sc_racbeh = "% of ppl that says racist behavior is very or quite frequent in their neighborhood"
 local t_si_prowom = "% of ppl that agrees it is a problem if women earn more than their husbands"
 local t_si_menjob = "% of ppl that agrees that when jobs are scarce, men should have more right to a job than women"
 local t_si_infint = "% of ppl that uses the internet as a source of information"
 local t_si_ownban = "% of ppl that owns a bank account"
-local t_sc_fata = "fatalities due to violence index (0-100, low to high)"
+local t_sc_fata = "fatalities due to violence"
 local t_sc_numeve = "number of violent events"
 local t_re_totaff = "% of ppl affected by climate change index (0-100, low to high)"
 local t_pl_riggua = "life and security are effectively guaranteed index (0-100, low to high)"
@@ -141,13 +159,13 @@ local t_pl_rullaw = "rule of law index (0-100, low to high)"
 local t_pl_goveff = "government effectiveness index (0-100, low to high)"
 local t_pl_concor = "control of corruption index (0-100, low to high)"
 local t_si_beawif = "% of women who believe a husband is justified in beating his wife"
-local t_sc_hom = "homicide index (0-100, low to high)"
+local t_sc_hom = "intentional homicides (per 100000 people)"
 local t_si_prosea = "% of women in the parliament"
 local t_pl_civspa = "civic space score (0-100, low to high)"
 local t_ex_disability1 = "% of people who experienced discrimination based on disability"
 local t_ex_disability2 = "% of people who have at least one household member living with a disability"
 
-global vars "sex ageg1 ageg2 ageg3 youth urban si_labfor si_unerat si_sel si_con si_wat si_san si_ele si_int si_prienr si_pricom si_secenr si_hea si_socsec si_femsec re_com re_cel re_tel re_rad re_was re_sew re_mot re_fri re_car re_ownlan re_assets re_mortha re_rem sc_frespe sc_frejoi sc_vot sc_attdem si_intuse re_enofoo sc_volass sc_conpol sc_conele sc_congov sc_conjus sc_trupeo sc_homnei sc_insnei sc_unshom si_menbet re_savmon sc_actmem sc_solpro si_chiear re_govtra sc_viccri sc_racbeh si_prowom si_menjob si_infint si_ownban sc_fata sc_numeve re_totaff pl_riggua pl_powlim pl_nodis pl_govreg pl_accjus pl_rullaw pl_goveff pl_concor si_beawif sc_hom si_prosea pl_civspa ex_disability1 ex_disability2"
+global vars "sex ageg1 ageg2 ageg3 youth urban si_labfor si_unerat si_sel si_con si_wat si_san si_ele si_int si_prienr si_pricom si_secenr si_hea si_socsec si_femsec re_com re_cel re_tel re_rad re_was re_sew re_mot re_fri re_car re_ownlan re_assets re_mortha re_rem sc_frespe sc_frejoi sc_vot sc_attdem si_intuse re_enofoo sc_volass sc_conpol sc_conele sc_congov sc_conjus sc_trupeo sc_homnei sc_insnei sc_unshom si_menbet re_savmon sc_actmem sc_solpro si_chiear re_govtra sc_viccri sc_racbeh si_prowom si_menjob si_infint si_ownban sc_fata sc_numeve re_totaff pl_riggua pl_powlim pl_nodis pl_govreg pl_accjus pl_rullaw pl_goveff pl_concor si_beawif sc_hom si_prosea pl_civspa ex_disability1 ex_disability2 si_uneratb si_uneratc si_watb si_watc si_sanb si_sanc si_eleb si_seccoma si_seccomb si_seccomc si_secenrb re_govtrab re_savmonb re_enofoob re_enofooc"
 
 foreach x in $vars{
 	forvalues t = 1/2{
@@ -245,7 +263,7 @@ foreach x in $selvars{
 }
 
 * standardize rates (from 0-1 to 0-100)
-global selvars "ex_ageg1 ex_ageg2 ex_ageg3 ex_disability1 ex_disability2 ex_gaphci ex_hdi ex_humcap ex_sex ex_youth pl_accjus pl_concor pl_goveff pl_govreg pl_nodis pl_powlim pl_riggua pl_rullaw re_assets re_car re_cel re_com re_enofoo re_fri re_govtra re_mortha re_mot re_ownlan re_rad re_rem re_savmon re_sew re_tel re_totaff re_was sc_actmem sc_attdem sc_conele sc_congov sc_conjus sc_conpol sc_fata sc_frejoi sc_frespe sc_hom sc_homnei sc_insnei sc_numeve sc_racbeh sc_solpro sc_trupeo sc_unshom sc_viccri sc_volass sc_vot si_beawif si_chiear si_con si_ele si_femsec si_hea si_infint si_int si_intuse si_labfor si_menbet si_menjob si_ownban si_pricom si_prienr si_prosea si_prowom si_san si_secenr si_sel si_socsec si_unerat si_wat"
+global selvars "ex_ageg1 ex_ageg2 ex_ageg3 ex_disability1 ex_disability2 ex_gaphci ex_hdi ex_humcap ex_sex ex_youth pl_accjus pl_concor pl_goveff pl_govreg pl_nodis pl_powlim pl_riggua pl_rullaw re_assets re_car re_cel re_com re_enofoo re_fri re_govtra re_mortha re_mot re_ownlan re_rad re_rem re_savmon re_sew re_tel re_totaff re_was sc_actmem sc_attdem sc_conele sc_congov sc_conjus sc_conpol sc_fata sc_frejoi sc_frespe sc_hom sc_homnei sc_insnei sc_racbeh sc_solpro sc_trupeo sc_unshom sc_viccri sc_volass sc_vot si_beawif si_chiear si_con si_ele si_femsec si_hea si_infint si_int si_intuse si_labfor si_menbet si_menjob si_ownban si_pricom si_prienr si_prosea si_prowom si_san si_secenr si_sel si_socsec si_unerat si_wat"
 
 foreach x in $selvars{
 	replace `x'_w1 = `x'_w1*100
@@ -282,7 +300,8 @@ foreach x in prosea prowom menjob chiear menbet femsec beawif{
 
 * The "voice and accountability estimate" indicator now belongs to the PL pillar/dimension
 * The "economic and social rights performance score" indicator now belongs to the PL pillar/dimension
-foreach x in voiceest econsocrights{
+* The "democracy index" and all its components now belongs to the PL pillar/dimension
+foreach x in voiceest econsocrights demind demind_elec demind_func demind_polpar demind_polcul demind_civil{
 	forvalues t = 1/2{
 		rename ex_`x'_w`t' pl_`x'_w`t'
 		rename sou_ex_`x'_w`t' sou_pl_`x'_w`t'

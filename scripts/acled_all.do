@@ -22,10 +22,12 @@ cd "$raw_data"
 
 set max_memory . // It is highly recommended that you run this line of code since the database requires a great memory to open it.
 
-import delimited using "2018-01-01-2020-12-31.csv", case(lower) delimiters(",") clear
+insheet using "2018-01-01-2020-12-31.csv", delimiter(";") clear
+
+*import delimited using "2018-01-01-2020-12-31.csv", case(lower) delimiters(",") clear
 
 * We only deal with violent events (See ACLED documentation)
-keep if event_type=="Battles" | event_type=="Explossions/Remote violence" | event_type=="Violence against civilians"
+keep if event_type=="Battles" | event_type=="Explossions/Remote violence" | event_type=="Violence against civilians" | (event_type=="Protests" & sub_event_type=="Excessive force against protesters") | event_type=="Riots"
 
 * Each row defines a violent event, we create a unit vector and then collapse it over countries and year
 gen x = 1
@@ -57,7 +59,7 @@ foreach x in sc_fata sc_numeve{
 
 ** Labelling
 * variables
-local t_sc_fata = "Fatalities due to violence Index (0-1, low to high)"
+local t_sc_fata = "Fatalities due to violence"
 local t_sc_numeve = "Number of violent events"
 * groups
 local t_nat = "national"
@@ -99,6 +101,8 @@ replace countryname = "Taiwan ROC" if countryname=="Taiwan"
 replace countryname = "United States of America" if countryname=="United States"
 replace countryname = "Eswatini" if countryname=="eSwatini"
 replace countryname = "St. Kitts and Nevis" if countryname=="Saint Kitts and Nevis"
+replace countryname = "Luxemburg" if countryname=="Luxembourg"
+replace countryname = "Virgin Islands" if countryname=="Virgin Islands, U.S."
 
 * attaching data of countrycodes
 preserve
@@ -163,10 +167,12 @@ cd "$raw_data"
 
 set max_memory . // It is highly recommended that you run this line of code since the database requires a great memory to open it.
 
-import delimited using "2021-01-01-2022-12-31.xlsx", case(lower) delimiters(",") clear
+insheet using "2021-01-01-2022-12-31.csv", delimiter(";") clear
+
+*import delimited using "2021-01-01-2022-12-31.xlsx", case(lower) delimiters(",") clear
 
 * We only deal with violent events (See ACLED documentation)
-keep if event_type=="Battles" | event_type=="Explossions/Remote violence" | event_type=="Violence against civilians"
+keep if event_type=="Battles" | event_type=="Explossions/Remote violence" | event_type=="Violence against civilians" | (event_type=="Protests" & sub_event_type=="Excessive force against protesters") | event_type=="Riots"
 
 * Each row defines a violent event, we create a unit vector and then collapse it over countries and year
 gen x = 1
@@ -198,7 +204,7 @@ foreach x in sc_fata sc_numeve{
 
 ** Labelling
 * variables
-local t_sc_fata = "Fatalities due to violence Index (0-1, low to high)"
+local t_sc_fata = "Fatalities due to violence"
 local t_sc_numeve = "Number of violent events"
 * groups
 local t_nat = "national"
@@ -240,6 +246,8 @@ replace countryname = "Taiwan ROC" if countryname=="Taiwan"
 replace countryname = "United States of America" if countryname=="United States"
 replace countryname = "Eswatini" if countryname=="eSwatini"
 replace countryname = "St. Kitts and Nevis" if countryname=="Saint Kitts and Nevis"
+replace countryname = "Luxemburg" if countryname=="Luxembourg"
+replace countryname = "St. Martin" if countryname=="Saint-Martin"
 
 * attaching data on countrycodes
 preserve
@@ -270,11 +278,13 @@ drop _merge
 recode sc_fata_nat (. = 0)
 recode sc_numeve_nat (. = 0)
 
+/*
 * standardization for sc_nata
 qui: sum sc_fata_nat
 local sc_fata_min = r(min)
 local sc_fata_max = r(max)
 replace sc_fata_nat = (sc_fata_nat - `sc_fata_min')/(`sc_fata_max' - `sc_fata_min')
+*/
 
 * Final data arrangement
 forvalues t = 2018(1)2022{
