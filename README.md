@@ -37,9 +37,9 @@ For a detailed explanation of each block, please refer to the "SSGD v2.0 Technic
 
 ## Data Sources
 
-Data for the SSGD v2.0 is sourced from various databases. Users will need to manually download specific data files from certain sources and copy them to the "raw_data" folder. The necessary databases and files are listed in Table A1 of the replication guidelines document.
+Data for the SSGD v2.0 is sourced from various databases. Users will need to manually download specific data files from certain sources and copy them to the "raw_data" folder. The necessary databases and files are listed in Table C1 in the Appendix section of the technical notes.
 
-**Note**: Three databases - CIVICUS, EIU, and EQOSOGI - are included by default in the SSGD v2.0 repository as they are sourced from reports rather than directly downloadable data sets. See Table A2 in the guidelines for more information.
+**Note**: Three databases - CIVICUS, EIU, and EQOSOGI - are included by default in the SSGD v2.0 repository as they are sourced from reports rather than directly downloadable data sets. See Table C2 in the technical notes for more information.
 
 ## Getting Started
 
