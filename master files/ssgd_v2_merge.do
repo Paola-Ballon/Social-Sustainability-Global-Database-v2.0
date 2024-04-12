@@ -26,6 +26,11 @@ merge 1:1 countrycode group using "ssgd_arabbarometer.dta", nogenerate update
 merge 1:1 countrycode group using "ssgd_arabbarometer_extra.dta", nogenerate update
 merge 1:1 countrycode group using "ssgd_asianbarometer.dta", nogenerate update
 merge 1:1 countrycode group using "ssgd_latinobarometro.dta", nogenerate update
+merge 1:1 countrycode group using "ssgd_afrobarometer_subnational.dta", nogenerate update
+merge 1:1 countrycode group using "ssgd_arabbarometer_subnational.dta", nogenerate update
+merge 1:1 countrycode group using "ssgd_arabbarometer_extra_subnational.dta", nogenerate update
+merge 1:1 countrycode group using "ssgd_asianbarometer_subnational.dta", nogenerate update
+merge 1:1 countrycode group using "ssgd_latinobarometro_subnational.dta", nogenerate update
 forvalues t = 1/11{
 	merge 1:1 countrycode group using "ssgd_wvs_part`t'.dta", nogenerate update
 }
@@ -45,12 +50,12 @@ forvalues t = 1/6{
 
 * format corrections
 format countrycode %5s
-drop rel_major_count eth_major_count GMD_period_w2
+drop GMD_period_w2
 
 * attaching countrynames and region
 drop Region countryname
 preserve
-import excel using "D:\Omar\World Bank\SSG database\list_countries.xlsx", firstrow sheet("countries_codes") clear
+import excel using "${ssgd_v2_userpath}\SSGD v2.0\other\list_countries.xlsx", firstrow sheet("countries_codes") clear
 rename Country countryname
 rename Code countrycode
 rename Region region
@@ -322,4 +327,4 @@ foreach x in wbl_index mobility workplace pay marriage parenthood entrepreneursh
 * Also, we remove the "% of ppl affected by climate change index (0-100, low to high)" indicator from the SSGD v2.0 database
 drop re_totaff* per_re_totaff* sou_re_totaff* ex_scientificart* per_ex_scientificart* sou_ex_scientificart*
 
-save "$final_data\ssgd_v_2_0.dta", replace
+save "ssgd_v_2_0.dta", replace
