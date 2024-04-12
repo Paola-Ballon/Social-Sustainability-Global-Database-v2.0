@@ -358,8 +358,14 @@ foreach x in ex_treeloss ex_forestarea ex_energyint ex_co2emissions ex_coolingda
 	egen per_`x'_w2 = max(year) if `x'!=. & year>=2019 & year<=2021
 	gen `x'_w1 = `x' if year==per_`x'_w1
 	gen `x'_w2 = `x' if year==per_`x'_w2
-	gen sou_`x'_w1 = "WGI" if year==per_`x'_w1
-	gen sou_`x'_w2 = "WGI" if year==per_`x'_w2
+	if ("`x'"=="ex_polstab" | "`x'"=="ex_regulqua" | "`x'"=="ex_voiceest"){
+		gen sou_`x'_w1 = "WGI" if year==per_`x'_w1
+		gen sou_`x'_w2 = "WGI" if year==per_`x'_w2
+	}
+	else{
+		gen sou_`x'_w1 = "ESG" if year==per_`x'_w1
+		gen sou_`x'_w2 = "ESG" if year==per_`x'_w2
+	}
 	drop `x'
 }
 

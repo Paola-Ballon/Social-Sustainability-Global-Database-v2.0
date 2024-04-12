@@ -1,8 +1,12 @@
 * Social Sustainability Global Database v2.0
 * consultant: Omar Alburqueque Chavez
 * contact: oalburquequechav@worldbank.org
-* last update: December 10, 2023
+* last update: April 12, 2024
 * original data source: https://acleddata.com/data-export-tool/
+
+* ---------------------------------------------------------------------------- *
+*								 FIRST PART 								   *
+* ---------------------------------------------------------------------------- *
 
 /*
 Issues:
@@ -118,43 +122,11 @@ drop _merge
 
 save "acled_temp_p1.dta", replace
 
-/*
-* Final data arrangement
-forvalues t = 2018(1)2020{
-	preserve
-	keep if year==`t'
-	rename year period
-	tostring period, replace
-	gen source = "ACLED"
-	order countryname countrycode period source sc_fata* sc_numeve*
-	qui: sum sc_fata_nat
-	local sc_fata_min = r(min)
-	local sc_fata_max = r(max)
-	replace sc_fata_nat = (sc_fata_nat - `sc_fata_min')/(`sc_fata_max' - `sc_fata_min')
-	save "$proc_data\acled`t'.dta", replace
-	restore
-}
-*/
-
 erase "countries_codes.dta"
 
 * ---------------------------------------------------------------------------- *
+*								 SECOND PART 								   *
 * ---------------------------------------------------------------------------- *
-* ---------------------------------------------------------------------------- *
-
-
-* Social Sustainability Global Database
-* consultant: Omar Alburqueque Chavez
-* contact: oalburquequechav@worldbank.org
-* last update: March 6th, 2023
-* original data source: https://databank.worldbank.org/source/worldwide-governance-indicators#
-
-/*
-Issues:
-	- Data availability is limited to the national level
-	- We require a sound definition of "fatalities due to violence" because some demonstration events may be classified as violent and they reported casualties. Temporarily, we assume that both the number of violent events and the fatalities only considers violent events. For more information see the ACLED codebook: 
-	https://acleddata.com/acleddatanew/wp-content/uploads/2021/11/ACLED_Codebook_v1_January-2021.pdf
-*/
 
 clear all
 set more off
@@ -262,7 +234,7 @@ keep if _merge==3
 drop _merge
 
 * attaching data from part 1
-merge 1:1 countryname year using "acled_temp_p1.dta", nogenerate
+append using "acled_temp_p1.dta"
 
 * Not all countries appear in all years within the 2018-2022 period, we use tsfill to fill any gap
 encode countryname, g(countryname2)
@@ -277,14 +249,6 @@ keep if _merge==3
 drop _merge
 recode sc_fata_nat (. = 0)
 recode sc_numeve_nat (. = 0)
-
-/*
-* standardization for sc_nata
-qui: sum sc_fata_nat
-local sc_fata_min = r(min)
-local sc_fata_max = r(max)
-replace sc_fata_nat = (sc_fata_nat - `sc_fata_min')/(`sc_fata_max' - `sc_fata_min')
-*/
 
 * Final data arrangement
 forvalues t = 2018(1)2022{

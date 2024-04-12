@@ -28,20 +28,6 @@ use "temp_wdi.dta", clear
 keep if seriescode=="VC.IHR.PSRC.P5" // keep homicide rates
 keep country* yr* // keep years within selected period
 
-/*
-* Scaling index
-egen t1_min = rowmin(yr*)
-egen t1_max = rowmax(yr*)
-qui: sum t1_min
-local v_min = r(min) // we define the minimum value of overall selected period
-qui: sum t1_max
-local v_max = r(max) // we define the maximum value of overall selected period
-drop t1_min t1_max
-forvalues t = 2015/2021{
-	replace yr`t' = (yr`t' - `v_min')/(`v_max' - `v_min') // we scale every rate to the [0,1] interval
-}
-*/
-
 * Reshape
 reshape long yr, i(countrycode) j(year) // reshape to long format
 rename yr sc_hom_nat
