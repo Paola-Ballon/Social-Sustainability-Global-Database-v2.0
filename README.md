@@ -1,7 +1,7 @@
 # Social Sustainability Global Database (SSGD) v2.0
-The SSGD v2.0 presents aggregated information at the national level and, in some cases, by age, gender, area, ethnicity, and religion groups for 85 leading indicators distributed among four dimensions and five areas of Social Sustainability and Inclusion. It also contains information on 44  external indicators (outside the SSI framework) aggregated at the national level, which may relate to any leading indicator. The SSGD v2.0 covers 231 countries and two waves (2015-2018 and 2019-2022).
+The SSGD v2.0 compiles comprehensive data at multiple levels: nationally, across various demographic groups (including age, gender, location, ethnicity, and religion), and, in its latest update, at the subnational level. This version offers insights into 85 key indicators, which are organized across four dimensions of Social Sustainability and Inclusion: Inclusion, Resilience, Social Cohesion, and Process Legitimacy. It also contains information on 43  external indicators (outside the SSI framework) aggregated at the national level, which may relate to any leading indicator. The SSGD v2.0 covers 231 countries and two waves (2015-2018 and 2019-2022).
 
-These codes were developed by Omar Alburqueque and Paola Ballon of the Data & Analytics Global Solutions Group of the Social Sustainability and Inclusion Global Practice of the World Bank. Credits are as follows: Codes were written by Omar Alburqueque (oalburquequechav@worldbank.org) and supervised and revised by Paola Ballon (pballon@worldbank.org).
+These codes were developed by Omar Alburqueque and Paola Ballon of the Data & Analytics Global Solutions Group of the Social Sustainability and Inclusion Global Practice of the World Bank Group. Credits are as follows: Codes were written by Omar Alburqueque (oalburquequechav@worldbank.org) and supervised and revised by Paola Ballon (pballon@worldbank.org).
 
 ![SSGD v2.0 Indicators](https://github.com/Paola-Ballon/Social-Sustainability-Global-Database-v2.0/blob/main/documentation/Picture1.png?raw=true)
 
@@ -33,7 +33,7 @@ The replication process is divided into five blocks:
 4. **Data Processing**: In this step, users execute scripts that perform further data processing tasks. These tasks may include cleaning, transforming, or manipulating the data to fit the requirements of the Social Sustainability Global Database.
 5. **Data Merge**: This final step involves merging all processed data into a single dataset, ensuring consistency and readiness for analysis. Users will need to run the provided scripts that automatically handle the merging process.
 
-For a detailed explanation of each block, please refer to the "SSGD v2.0 replication guidelines.docx" file in this repository.
+For a detailed explanation of each block, please refer to the "SSGD v2.0 Technical Notes.docx" file in this repository.
 
 ## Data Sources
 
@@ -45,7 +45,7 @@ Data for the SSGD v2.0 is sourced from various databases. Users will need to man
 
 1. Clone this repository to your local machine.
 2. Ensure you meet all software requirements and have installed the necessary R and Stata packages.
-3. Follow the detailed instructions in the [SSGD v2.0 replication guidelines.docx](https://github.com/Paola-Ballon/Social-Sustainability-Global-Database-v2.0/blob/main/documentation/SSGD%20v2.0%20replication%20guidelines.docx) for setting up your user profile, downloading data, and running the scripts.
+3. Follow the detailed instructions in the [SSGD v2.0 Technical Notes.docx](https://github.com/Paola-Ballon/Social-Sustainability-Global-Database-v2.0/blob/main/documentation/SSGD%20v2.0%20Technical%20Notes.docx) for setting up your user profile, downloading data, and running the scripts.
 4. Refer to the guidelines document for troubleshooting and additional details.
 
 ## Support
