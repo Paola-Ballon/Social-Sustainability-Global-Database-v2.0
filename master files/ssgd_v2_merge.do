@@ -16,6 +16,10 @@ global final_data "${ssgd_v2_userpath}\SSGD v2.0\final_data"
 
 cd "$proc_data"
 
+* ---------------------------------------------------------------------------- *
+*	 				ENSAMNLING THE SSGD V2.0 ON WIDE FORMAT					   *
+* ---------------------------------------------------------------------------- *
+
 * --------------- *
 * Merging process *
 * --------------- *
@@ -327,4 +331,301 @@ foreach x in wbl_index mobility workplace pay marriage parenthood entrepreneursh
 * Also, we remove the "% of ppl affected by climate change index (0-100, low to high)" indicator from the SSGD v2.0 database
 drop re_totaff* per_re_totaff* sou_re_totaff* ex_scientificart* per_ex_scientificart* sou_ex_scientificart*
 
-save "ssgd_v_2_0.dta", replace
+* We also remove indicators (version b) that initially come from FINDEX and WDI since they do not match the original definitions
+foreach x in re_govtra re_savmon si_unerat si_wat si_san si_ele si_seccom si_secenr re_enofoo{
+	drop `x'b_w1 `x'b_w2 per_`x'b_w1 per_`x'b_w2 sou_`x'b_w1 sou_`x'b_w2
+}
+foreach x in si_unerat si_wat si_san si_seccom re_enofoo{
+	drop `x'c_w1 `x'c_w2 per_`x'c_w1 per_`x'c_w2 sou_`x'c_w1 sou_`x'c_w2
+}
+drop si_seccoma_w1 sou_si_seccoma_w1 per_si_seccoma_w1 si_seccoma_w2 sou_si_seccoma_w2 per_si_seccoma_w2
+* Drop urban rate variable from GMD, now it comes from WDI
+drop ex_urban_w1 ex_urban_w2 sou_ex_urban_w1 sou_ex_urban_w2 per_ex_urban_w1 per_ex_urban_w2
+
+* No data on categories related to disability
+drop if group=="pwd" | group=="nwithoutd"
+
+* External indicators only provide data at the national level
+replace ex_disability1_w1 = . if group!="nat"
+replace ex_disability1_w2 = . if group!="nat"
+replace ex_disability2_w1 = . if group!="nat"
+replace ex_disability2_w2 = . if group!="nat"
+
+save "$final_data\ssgd_v2_wide.dta", replace
+
+* ---------------------------------------------------------------------------- *
+*	 				ENSAMNLING THE SSGD V2.0 ON LONG FORMAT					   *
+* ---------------------------------------------------------------------------- *
+
+* First reshape
+* generate identificator
+gen id = _n
+mi unset, asis
+
+global vars "si_labfor_ si_unerat_ si_sel_ si_con_ si_ownban_ si_wat_ si_san_ si_ele_ si_int_ si_intuse_ si_prienr_ si_pricom_ si_secenr_ si_hea_ si_socsec_ si_legalrights_ re_com_ re_cel_ re_tel_ re_rad_ re_was_ re_sew_ re_mot_ re_fri_ re_car_ re_ownlan_ re_assets_ re_govtra_ re_rem_ re_savmon_ re_enofoo_ re_mortha_ sc_trupeo_ sc_homnei_ sc_congov_ sc_conpol_ sc_conele_ sc_conjus_ sc_insnei_ sc_unshom_ sc_viccri_ sc_racbeh_ sc_vot_ sc_attdem_ sc_frespe_ sc_frejoi_ sc_solpro_ sc_actmem_ sc_volass_ sc_fata_ sc_numeve_ sc_hom_ pl_prosea_ pl_prowom_ pl_menjob_ pl_chiear_ pl_menbet_ pl_femsec_ pl_beawif_ pl_rullaw_ pl_goveff_ pl_concor_ pl_riggua_ pl_powlim_ pl_nodis_ pl_govreg_ pl_accjus_ pl_civspa_ si_wbl_index_ si_mobility_ si_workplace_ si_pay_ si_marriage_ si_parenthood_ si_entrepreneurship_ si_assets_ si_pension_ pl_voiceest_ pl_econsocrights_ pl_demind_ pl_demind_elec_ pl_demind_func_ pl_demind_polpar_ pl_demind_polcul_ pl_demind_civil_"
+global per_vars "per_si_labfor_ per_si_unerat_ per_si_sel_ per_si_con_ per_si_ownban_ per_si_wat_ per_si_san_ per_si_ele_ per_si_int_ per_si_intuse_ per_si_prienr_ per_si_pricom_ per_si_secenr_ per_si_hea_ per_si_socsec_ per_si_legalrights_ per_re_com_ per_re_cel_ per_re_tel_ per_re_rad_ per_re_was_ per_re_sew_ per_re_mot_ per_re_fri_ per_re_car_ per_re_ownlan_ per_re_assets_ per_re_govtra_ per_re_rem_ per_re_savmon_ per_re_enofoo_ per_re_mortha_ per_sc_trupeo_ per_sc_homnei_ per_sc_congov_ per_sc_conpol_ per_sc_conele_ per_sc_conjus_ per_sc_insnei_ per_sc_unshom_ per_sc_viccri_ per_sc_racbeh_ per_sc_vot_ per_sc_attdem_ per_sc_frespe_ per_sc_frejoi_ per_sc_solpro_ per_sc_actmem_ per_sc_volass_ per_sc_fata_ per_sc_numeve_ per_sc_hom_ per_pl_prosea_ per_pl_prowom_ per_pl_menjob_ per_pl_chiear_ per_pl_menbet_ per_pl_femsec_ per_pl_beawif_ per_pl_rullaw_ per_pl_goveff_ per_pl_concor_ per_pl_riggua_ per_pl_powlim_ per_pl_nodis_ per_pl_govreg_ per_pl_accjus_ per_pl_civspa_ per_si_wbl_index_ per_si_mobility_ per_si_workplace_ per_si_pay_ per_si_marriage_ per_si_parenthood_ per_si_entrepreneurship_ per_si_assets_ per_si_pension_ per_pl_voiceest_ per_pl_econsocrights_ per_pl_demind_ per_pl_demind_elec_ per_pl_demind_func_ per_pl_demind_polpar_ per_pl_demind_polcul_ per_pl_demind_civil_"
+global sou_vars "sou_si_labfor_ sou_si_unerat_ sou_si_sel_ sou_si_con_ sou_si_ownban_ sou_si_wat_ sou_si_san_ sou_si_ele_ sou_si_int_ sou_si_intuse_ sou_si_prienr_ sou_si_pricom_ sou_si_secenr_ sou_si_hea_ sou_si_socsec_ sou_si_legalrights_ sou_re_com_ sou_re_cel_ sou_re_tel_ sou_re_rad_ sou_re_was_ sou_re_sew_ sou_re_mot_ sou_re_fri_ sou_re_car_ sou_re_ownlan_ sou_re_assets_ sou_re_govtra_ sou_re_rem_ sou_re_savmon_ sou_re_enofoo_ sou_re_mortha_ sou_sc_trupeo_ sou_sc_homnei_ sou_sc_congov_ sou_sc_conpol_ sou_sc_conele_ sou_sc_conjus_ sou_sc_insnei_ sou_sc_unshom_ sou_sc_viccri_ sou_sc_racbeh_ sou_sc_vot_ sou_sc_attdem_ sou_sc_frespe_ sou_sc_frejoi_ sou_sc_solpro_ sou_sc_actmem_ sou_sc_volass_ sou_sc_fata_ sou_sc_numeve_ sou_sc_hom_ sou_pl_prosea_ sou_pl_prowom_ sou_pl_menjob_ sou_pl_chiear_ sou_pl_menbet_ sou_pl_femsec_ sou_pl_beawif_ sou_pl_rullaw_ sou_pl_goveff_ sou_pl_concor_ sou_pl_riggua_ sou_pl_powlim_ sou_pl_nodis_ sou_pl_govreg_ sou_pl_accjus_ sou_pl_civspa_ sou_si_wbl_index_ sou_si_mobility_ sou_si_workplace_ sou_si_pay_ sou_si_marriage_ sou_si_parenthood_ sou_si_entrepreneurship_ sou_si_assets_ sou_si_pension_ sou_pl_voiceest_ sou_pl_econsocrights_ sou_pl_demind_ sou_pl_demind_elec_ sou_pl_demind_func_ sou_pl_demind_polpar_ sou_pl_demind_polcul_ sou_pl_demind_civil_"
+global external "ex_sex_ ex_ageg1_ ex_ageg2_ ex_ageg3_ ex_youth_ ex_disability1_ ex_disability2_ ex_ferrat_ ex_gdpppc_ ex_mulpov_ ex_humcap_ ex_povnat_ ex_gini_ ex_urbpop_ ex_shapro_ ex_loggdp_ ex_gaphci_ ex_shapp_ ex_avega2_ ex_growthgdppc_ ex_hdi_ ex_treeloss_ ex_forestarea_ ex_energyint_ ex_co2emissions_ ex_coolingdays_ ex_heatingdays_ ex_waterstress_ ex_researchexp_ ex_patentapp_ ex_indinternet_ ex_polstab_ ex_regulqua_ ex_schoolgpi_ ex_ratiofem_ ex_netmigration_ ex_unmetcontr_ ex_eqocrimi_ ex_eqoinclu_ ex_eqolabor_ ex_eqopubli_ ex_eqocivil_ ex_eqoprote_"
+global per_external "per_ex_sex_ per_ex_ageg1_ per_ex_ageg2_ per_ex_ageg3_ per_ex_youth_ per_ex_disability1_ per_ex_disability2_ per_ex_ferrat_ per_ex_gdpppc_ per_ex_mulpov_ per_ex_humcap_ per_ex_povnat_ per_ex_gini_ per_ex_urbpop_ per_ex_shapro_ per_ex_loggdp_ per_ex_gaphci_ per_ex_shapp_ per_ex_avega2_ per_ex_growthgdppc_ per_ex_hdi_ per_ex_treeloss_ per_ex_forestarea_ per_ex_energyint_ per_ex_co2emissions_ per_ex_coolingdays_ per_ex_heatingdays_ per_ex_waterstress_ per_ex_researchexp_ per_ex_patentapp_ per_ex_indinternet_ per_ex_polstab_ per_ex_regulqua_ per_ex_schoolgpi_ per_ex_ratiofem_ per_ex_netmigration_ per_ex_unmetcontr_ per_ex_eqocrimi_ per_ex_eqoinclu_ per_ex_eqolabor_ per_ex_eqopubli_ per_ex_eqocivil_ per_ex_eqoprote_"
+global sou_external "sou_ex_sex_ sou_ex_ageg1_ sou_ex_ageg2_ sou_ex_ageg3_ sou_ex_youth_ sou_ex_disability1_ sou_ex_disability2_ sou_ex_ferrat_ sou_ex_gdpppc_ sou_ex_mulpov_ sou_ex_humcap_ sou_ex_povnat_ sou_ex_gini_ sou_ex_urbpop_ sou_ex_shapro_ sou_ex_loggdp_ sou_ex_gaphci_ sou_ex_shapp_ sou_ex_avega2_ sou_ex_growthgdppc_ sou_ex_hdi_ sou_ex_treeloss_ sou_ex_forestarea_ sou_ex_energyint_ sou_ex_co2emissions_ sou_ex_coolingdays_ sou_ex_heatingdays_ sou_ex_waterstress_ sou_ex_researchexp_ sou_ex_patentapp_ sou_ex_indinternet_ sou_ex_polstab_ sou_ex_regulqua_ sou_ex_schoolgpi_ sou_ex_ratiofem_ sou_ex_netmigration_ sou_ex_unmetcontr_ sou_ex_eqocrimi_ sou_ex_eqoinclu_ sou_ex_eqolabor_ sou_ex_eqopubli_ sou_ex_eqocivil_ sou_ex_eqoprote_"
+
+reshape long $vars $external $per_vars $sou_vars $per_external $sou_external, i(id) j(wave) string
+
+gen wave2 = .
+replace wave2 = 1 if wave=="w1"
+replace wave2 = 2 if wave=="w2"
+drop wave id
+rename wave2 wave
+
+* Second reshape
+gen id = _n
+
+foreach x in $vars $external{
+	rename `x' value_`x'
+	rename per_`x' period_`x'
+	rename sou_`x' source_`x'
+}
+reshape long value_ period_ source_, i(id) j(variable) string
+drop id
+rename value_ value
+rename source_ source
+rename period_ period
+
+keep variable countryname countrycode region group wave value source period
+keep if value!=.
+
+rename variable x1
+gen x2 = substr(x1,1,3)
+
+replace x2 = "External Variables" if x2=="ex_"
+replace x2 = "Process Legitimacy" if x2=="pl_"
+replace x2 = "Resilience" if x2=="re_"
+replace x2 = "Social Cohesion" if x2=="sc_"
+replace x2 = "Social Inclusion" if x2=="si_"
+rename x2 dimension
+
+gen area = ""
+replace area = "Age group (2 levels)" if group=="15_24" | group=="24plus"
+replace area = "Age group (3 levels)" if group=="15_29" | group=="30_59" | group=="60plus"
+replace area = "Ethnicity" if group=="ethmaj" | group=="ethmin"
+replace area = "Gender" if group=="fem" | group=="male"
+replace area = "National" if group=="nat"
+replace area = "Religion" if group=="relmaj" | group=="relmin"
+replace area = "Location" if group=="rural" | group=="urban"
+replace area = "Subnational" if area==""
+
+preserve
+keep if area=="Subnational"
+gen x = 1
+collapse (mean) x, by(countrycode group)
+drop x
+sort countrycode group
+bys countrycode: gen t1 = _n
+save "temp1.dta", replace
+restore
+
+merge m:1 countrycode group using "temp1.dta", nogenerate
+erase "temp1.dta"
+
+gen x = "ADM1_"
+egen t2 = concat(x countrycode t1)
+
+clonevar group2 = group // temporary variable
+replace group2 = t2 if t1!=.
+
+egen variable = concat(x1 group2)
+drop t1 t2 x group2
+
+tostring wave, replace
+
+replace group = "Age group 15-24" if group=="15_24"
+replace group = "Age group 15-29" if group=="15_29"
+replace group = "Ages 24+" if group=="24plus"
+replace group = "Age group 30-59" if group=="30_59"
+replace group = "Ages 60+" if group=="60plus"
+replace group = "Ethnicity, main" if group=="ethmaj"
+replace group = "Ethnicity, minorities" if group=="ethmin"
+replace group = "Female" if group=="fem"
+replace group = "Male" if group=="male"
+replace group = "National" if group=="nat"
+replace group = "Religion, main" if group=="relmaj"
+replace group = "Religion, minorities" if group=="relmin"
+replace group = "Rural" if group=="rural"
+replace group = "Urban" if group=="urban"
+rename group category
+
+replace x1 = substr(x1, 1, length(x1)-1)
+rename x1 short
+
+** Attaching metadata for indicators (indicator name, description, range, scale, etc)
+preserve
+import excel using "${ssgd_v2_userpath}\SSGD v2.0\support files\SSGD indicators metadata.xlsx", firstrow clear
+save "temp.dta", replace
+restore
+
+merge m:1 short using "temp.dta"
+drop if _merge==2
+drop _merge
+erase "temp.dta"
+
+** Attaching data on income groups and FCS condition
+preserve
+import excel using "${ssgd_v2_userpath}\SSGD v2.0\support files\WBG classifications income groups and FCS.xlsx", firstrow clear
+drop country
+save "temp.dta", replace
+restore
+
+merge m:1 countrycode using "temp.dta"
+drop if _merge==2
+drop _merge
+erase "temp.dta"
+
+gen incomegroup = ""
+forvalues t = 2015(1)2022{
+	replace incomegroup = income`t' if period=="`t'"
+}
+replace incomegroup = income2018 if period=="2017-2018"
+replace incomegroup = "Undefined" if incomegroup==""
+replace incomegroup = "High income" if incomegroup=="H"
+replace incomegroup = "Upper middle income" if incomegroup=="UM"
+replace incomegroup = "Lower middle income" if incomegroup=="LM"
+replace incomegroup = "Low income" if incomegroup=="L"
+drop income2015-income2023
+
+gen fragile = ""
+forvalues t = 2015(1)2022{
+	replace fragile = fcs`t' if period=="`t'"
+}
+replace fragile = fcs2018 if period=="2017-2018"
+replace fragile = "No" if fragile==""
+drop fcs*
+
+save "temporary_data.dta", replace
+
+** Attaching geodata to identify countries ADM0 codes and subnational ADM1 codes
+
+* 1st step: attaching ADM0 and ADM1 codes for entries with subnational data
+use "temporary_data.dta", clear
+keep if area=="Subnational"
+
+* Corrections in country names and subnational territories' names
+replace category = "M'Sila" if category=="M'sila" & countryname=="Algeria"
+replace category = "Kgalagadi" if category=="Kgaladi" & countryname=="Botswana"
+replace category = "Norte De Santander" if category=="Norte de Santander" & countryname=="Colombia"
+replace countryname = "Côte d'Ivoire" if countryname=="Cote D Ivoire"
+replace countryname = "Arab Republic of Egypt" if countryname=="Egypt"
+replace countryname = "Swaziland" if countryname=="Eswatini"
+replace countryname = "The Gambia" if countryname=="Gambia"
+replace category = "Gracias A Dios" if category=="Gracias a Dios" & countryname=="Honduras"
+replace countryname = "West Bank and Gaza" if countryname=="Palestine"
+replace countryname = "São Tomé and Príncipe" if countryname=="Sao Tome and Principe"
+replace countryname = "Republic of Korea" if countryname=="South Korea"
+replace countryname = "R. B. de Venezuela" if countryname=="Venezuela"
+replace countryname = "Republic of Yemen" if countryname=="Yemen"
+
+preserve
+import excel using "${ssgd_v2_userpath}\SSGD v2.0\support files\WBG approved ADM1 administrative boundaries.xlsx", firstrow clear
+drop if ADM1_NAME=="Administrative unit not available" & ADM0_NAME!="Mauritius"
+drop if ADM1_NAME=="Name Unknown" & ADM0_NAME!="Honduras"
+keep ADM0_NAME ADM1_NAME ADM0_CODE ADM1_CODE
+rename ADM0_NAME countryname
+rename ADM1_NAME category
+rename ADM1_CODE adm1_code
+rename ADM0_CODE adm0_code
+save "temp.dta", replace
+restore
+
+merge m:1 countryname category using "temp.dta"
+drop if _merge==2
+drop _merge
+erase "temp.dta"
+
+save "t1.dta", replace
+
+* 2nd step: attaching ADM0 codes for entries without subnational data
+use "temporary_data.dta", clear
+keep if area!="Subnational"
+
+* Corrections in country names
+replace countryname = "American Samoa (U.S.)" if countryname=="American Samoa"
+replace countryname = "Anguilla (U.K.)" if countryname=="Anguilla"
+replace countryname = "Aruba (Neth.)" if countryname=="Aruba"
+replace countryname = "Bermuda (U.K.)" if countryname=="Bermuda"
+replace countryname = "British Virgin Islands (U.K.)" if countryname=="British Virgin Islands"
+replace countryname = "Cayman Islands (U.K.)" if countryname=="Cayman Islands"
+replace countryname = "Democratic Republic of Congo" if countryname=="Congo, Dem. Rep."
+replace countryname = "Congo" if countryname=="Congo, Rep."
+replace countryname = "Côte d'Ivoire" if countryname=="Cote D Ivoire"
+replace countryname = "Curaçao (Neth.)" if countryname=="Curacao"
+replace countryname = "Arab Republic of Egypt" if countryname=="Egypt"
+replace countryname = "Swaziland" if countryname=="Eswatini"
+replace countryname = "Faroe Islands (Den.)" if countryname=="Faroe Islands"
+*replace countryname = "" if countryname=="French Guiana"
+replace countryname = "French Polynesia (Fr.)" if countryname=="French Polynesia"
+replace countryname = "The Gambia" if countryname=="Gambia"
+replace countryname = "Gibraltar (U.K.)" if countryname=="Gibraltar"
+replace countryname = "Greenland (Den.)" if countryname=="Greenland"
+*replace countryname = "" if countryname=="Guadeloupe"
+replace countryname = "Guam (U.S.)" if countryname=="Guam"
+replace countryname = "Guinea-Bissau" if countryname=="Guinea Bissau"
+replace countryname = "Hong Kong, SAR" if countryname=="Hong Kong SAR"
+replace countryname = "Islamic Republic of Iran" if countryname=="Iran"
+replace countryname = "Isle of Man (U.K.)" if countryname=="Isle of Man"
+replace countryname = "D. P. R. of Korea" if countryname=="Korea"
+replace countryname = "Lao People's Democratic Republic" if countryname=="Lao"
+replace countryname = "Luxembourg" if countryname=="Luxemburg"
+replace countryname = "Macau, SAR" if countryname=="Macau Sar"
+*replace countryname = "" if countryname=="Martinique"
+*replace countryname = "" if countryname=="Mayotte"
+replace countryname = "Federated States of Micronesia" if countryname=="Micronesia"
+replace countryname = "New Caledonia (Fr.)" if countryname=="New Caledonia"
+replace countryname = "FYR of Macedonia" if countryname=="North Macedonia"
+replace countryname = "Northern Mariana Islands (U.S.)" if countryname=="Northern Mariana Islands"
+replace countryname = "West Bank and Gaza" if countryname=="Palestine"
+replace countryname = "Puerto Rico (U.S.)" if countryname=="Puerto Rico"
+*replace countryname = "" if countryname=="Reunion"
+replace countryname = "Russian Federation" if countryname=="Russia"
+replace countryname = "São Tomé and Príncipe" if countryname=="Sao Tome and Principe"
+replace countryname = "Sint Maarten (Neth.)" if countryname=="Sint Maarten"
+replace countryname = "Republic of Korea" if countryname=="South Korea"
+replace countryname = "Saint Kitts and Nevis" if countryname=="St. Kitts and Nevis"
+replace countryname = "Saint-Martin (Fr.)" if countryname=="St. Martin"
+replace countryname = "Saint Vincent and the Grenadines" if countryname=="St. Vincent and the Grenadines"
+replace countryname = "Taiwan" if countryname=="Taiwan ROC"
+replace countryname = "Timor-Leste" if countryname=="Timor Leste"
+replace countryname = "Turks and Caicos Islands (U.K.)" if countryname=="Turks and Caicos Islands"
+replace countryname = "R. B. de Venezuela" if countryname=="Venezuela"
+replace countryname = "United States Virgin Islands (U.S.)" if countryname=="Virgin Islands"
+replace countryname = "Republic of Yemen" if countryname=="Yemen"
+
+preserve
+import excel using "${ssgd_v2_userpath}\SSGD v2.0\support files\WBG approved ADM1 administrative boundaries.xlsx", firstrow clear
+collapse (mean) OBJECTID, by(ADM0_NAME ADM0_CODE)
+drop OBJECTID
+rename ADM0_NAME countryname
+rename ADM0_CODE adm0_code
+save "temp.dta", replace
+restore
+
+merge m:1 countryname using "temp.dta"
+drop if _merge==2
+drop _merge
+erase "temp.dta"
+
+gen adm1_code = .
+
+append using "t1.dta"
+erase "t1.dta"
+erase "temporary_data.dta"
+
+* corrections in period
+forvalues t = 2015/2022{
+	replace period = "Year `t'" if period=="`t'"
+}
+replace period = "Years 2017-2018" if period=="2017-2018"
+
+order countryname countrycode adm0_code region incomegroup fragile variable dimension category adm1_code short indicator indicator_type value period source
+
+save "$final_data\ssgd_v2_long.dta", replace
+
+export excel using "$final_data\ssgd_v2_long.xlsx", firstrow(variables) replace

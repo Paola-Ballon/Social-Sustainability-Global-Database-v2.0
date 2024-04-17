@@ -162,29 +162,3 @@ rename variable indicator
 
 order dimension area indicator value_w1_BOL value_w2_BOL value_w1_ECU value_w2_ECU value_w1_PER value_w2_PER period_w1_BOL period_w2_BOL period_w1_ECU period_w2_ECU period_w1_PER period_w2_PER source_w1_BOL source_w2_BOL source_w1_ECU source_w2_ECU source_w1_PER source_w2_PER
 br
-
-
-
-
-/*
-rename value_ value
-rename source_ source
-rename period_ period
-save "ssgd_long_all.dta", replace
-
-* matrix for values
-mkmat $main_si $main_re $main_sc $main_pl, matrix(X1)
-matrix define X1 = X1'
-svmat X1
-
-* matrix for periods
-mkmat $main_si_per $main_re_per $main_sc_per $main_pl_per, matrix(X2)
-matrix define X2 = X2'
-svmat X2
-
-* matrix for source
-mkmat $main_si_sou $main_re_sou $main_sc_sou $main_pl_sou, matrix(X3)
-matrix define X3 = X3'
-svmat X3
-
-br

@@ -64,13 +64,13 @@ drop t1
 replace region = "Saga" if country==1 & region=="Northern Kyushu"
 * Tokai Tohaku Shikoku Kinki Kanto Hokuriku Chugoku expansion (general)
 local Tokai "Aiti Gifu Sizuoka"
-local Tohaku "Akita Aomori Hukusima Iwate Miyagi Yamagata"
+local Tohoku "Akita Aomori Hukusima Iwate Miyagi Yamagata"
 local Shikoku "Ehime Kagawa Kooti Tokusima"
 local Kinki "Hyoogo Kyooto Mie Nara Oosaka Siga Wakayama"
 local Kanto "Gunma Ibaraki Kanagawa Saitama Totigi Tookyoo Tiba"
 local Hokuriku "Hukui Isikawa Niigata Toyama"
 local Chugoku "Hirosima Okayama Simane Tottori Yamaguti"
-global elements "Tokai Tohaku Shikoku Kinki Kanto Hokuriku Chugoku"
+global elements "Tokai Tohoku Shikoku Kinki Kanto Hokuriku Chugoku"
 foreach z in $elements{
 	local count_`z' = `: word count ``z'''
 	local i = 0
@@ -86,12 +86,13 @@ foreach z in $elements{
 		}
 	}
 }
-set obs 30750
-replace country = 1 if _n==30749
-replace region = "Nagano" if country==1 & _n==30749
-replace country = 1 if _n==30750
-replace region = "Yamanasi" if country==1 & _n==30750
+set obs 31270
+replace country = 1 if _n==31269
+replace region = "Nagano" if country==1 & _n==31269
+replace country = 1 if _n==31270
+replace region = "Yamanasi" if country==1 & _n==31270
 replace region = "Hokkaidoo" if country==1 & region=="Hokkaido"
+replace region = "Kyooto" if region=="Higashiyama" & country==1
 
 * Hong Kong (2)
 drop if country==2 // Administrative unit not available
@@ -121,9 +122,9 @@ foreach z in $elements{
 		}
 	}
 }
-set obs 30784
-replace country = 3 if _n==30784
-replace region = "Cheju-do" if country==3 & _n==30784
+set obs 31304
+replace country = 3 if _n==31304
+replace region = "Cheju-do" if country==3 & _n==31304
 
 * China (4)
 * Southwest expansion
