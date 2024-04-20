@@ -20,14 +20,6 @@ cd "$raw_data"
 
 import excel using "P_Data_Extract_From_Worldwide_Governance_Indicators.xlsx", firstrow case(lower) clear
 
-* -------------------- *
-* Data standardization *
-* -------------------- *
-
-forvalues t = 2015/2021{
-	replace yr`t' = (yr`t'- (-2.5))/(2.5 - (-2.5))
-}
-
 * -------------------------- *
 * Period for data extraction *
 * -------------------------- *

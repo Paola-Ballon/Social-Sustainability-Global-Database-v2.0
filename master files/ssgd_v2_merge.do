@@ -626,6 +626,11 @@ replace period = "Years 2017-2018" if period=="2017-2018"
 
 order countryname countrycode adm0_code region incomegroup fragile variable dimension category adm1_code short indicator indicator_type value period source
 
+recode adm1_code (. = -99)
+
+replace wave = "Wave 1 (2015-2018)" if wave=="1"
+replace wave = "Wave 2 (2019-2022)" if wave=="2"
+
 save "$final_data\ssgd_v2_long.dta", replace
 
 export excel using "$final_data\ssgd_v2_long.xlsx", firstrow(variables) replace
