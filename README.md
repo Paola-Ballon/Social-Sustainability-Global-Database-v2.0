@@ -1,5 +1,5 @@
 # Social Sustainability Global Database (SSGD) v2.0
-The SSGD v2.0 compiles comprehensive data at multiple levels: nationally, across various demographic groups (including age, gender, location, ethnicity, and religion), and, in its latest update, at the subnational level. This version offers insights into 85 key indicators, which are organized across four dimensions of Social Sustainability and Inclusion: Inclusion, Resilience, Social Cohesion, and Process Legitimacy. It also contains information on 43  external indicators (outside the SSI framework) aggregated at the national level, which may relate to any leading indicator. The SSGD v2.0 covers 231 countries and two waves (2015-2018 and 2019-2022).
+The SSGD v2.0 compiles comprehensive data at multiple levels: nationally, across various demographic groups (including age, gender, location, ethnicity, and religion), and, in its latest update, at the subnational level. This version offers insights into 85 key indicators, which are organized across four dimensions of Social Sustainability and Inclusion: Inclusion, Resilience, Social Cohesion, and Process Legitimacy. It also contains information on 43  development indicators (outside the SSI framework) aggregated at the national level, which may relate to any leading indicator. The SSGD v2.0 covers 223 countries and two waves (2015-2018 and 2019-2022).
 
 These codes were developed by Omar Alburqueque and Paola Ballon of the Data & Analytics Global Solutions Group of the Social Sustainability and Inclusion Global Practice of the World Bank Group. Credits are as follows: Codes were written by Omar Alburqueque (oalburquequechav@worldbank.org) and supervised and revised by Paola Ballon (pballon@worldbank.org).
 
@@ -37,9 +37,9 @@ For a detailed explanation of each block, please refer to the "SSGD v2.0 Technic
 
 ## Data Sources
 
-Data for the SSGD v2.0 is sourced from various databases. Users will need to manually download specific data files from certain sources and copy them to the "raw_data" folder. The necessary databases and files are listed in Table C1 in the Appendix section of the technical notes.
+Data for the SSGD v2.0 is sourced from various databases. Users will need to manually download specific data files from certain sources and copy them to the "raw_data" folder. The necessary databases and files are listed in Table B.1 in the appendix section of the technical notes.
 
-**Note**: Three databases - CIVICUS, EIU, and EQOSOGI - are included by default in the SSGD v2.0 repository as they are sourced from reports rather than directly downloadable data sets. See Table C2 in the technical notes for more information.
+**Note**: Three databases - CIVICUS, EIU, and EQOSOGI - are included by default in the SSGD v2.0 repository as they are sourced from reports rather than directly downloadable data sets. See Table B.2 in the appendix section of the technical notes for more information.
 
 ## Getting Started
 
@@ -55,4 +55,3 @@ For questions or assistance, please open an issue in this repository or contact 
 ## Contributing
 
 We welcome contributions to improve the replication process. If you have suggestions, please open an issue or submit a pull request.
-
